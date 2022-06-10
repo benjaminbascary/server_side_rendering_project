@@ -1,18 +1,23 @@
+import { homePage, aboutPage, serverError, notFound, toursRequest } from './lib/handlers.js';
+import { headerRequest } from './lib/headersRequest.js';
 import { engine as expressHandlebars } from 'express-handlebars';
 import { fileURLToPath } from 'url';
 import express from 'express';
 import path from 'path';
-import { homePage, aboutPage, serverError, notFound } from './lib/handlers.js';
+import bodyParser from 'body-parser';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 const port = process.env.PORT || 3000;
 
+
 /**
- * STATIC middleware
+ * middleware
  */
 
+app.disable('x-powered-by');
+app.use(bodyParser.urlencoded({ extended : false }));
 app.use(express.static(__dirname + '/public'));
 
 /**
@@ -31,6 +36,10 @@ app.set('view engine', 'handlebars');
 app.get('/', homePage);
 
 app.get('/about', aboutPage);
+
+app.get('/headers', headerRequest);
+
+app.get('/api/tours', toursRequest);
 
 /**
  * 404 and 500 custom pages.
