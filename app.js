@@ -1,8 +1,9 @@
+import { homePage, aboutPage, serverError, notFound } from './lib/handlers.js';
 import { engine as expressHandlebars } from 'express-handlebars';
-import path from 'path';
 import { fileURLToPath } from 'url';
-import randomFortune from './lib/fortuneCookies.js';
 import express from 'express';
+import path from 'path';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
@@ -27,28 +28,17 @@ app.set('view engine', 'handlebars');
  * Routes
  */
 
-app.get('/', (req, res) => {
-	res.render('home');
-})
+app.get('/', homePage);
 
-app.get('/about', (req, res) => {
-	res.render('about', {fortune: randomFortune});
-})
+app.get('/about', aboutPage);
 
 /**
  * 404 and 500 custom pages.
  */
 
-app.use((req, res) => {
-	res.status(404);
-	res.render('404');
-})
+app.use(notFound);
 
-app.use((err, req, res, next) => {
-	console.error(err);
-	res.status(500);
-	res.render('500');
-})
+app.use(serverError);
 
 app.listen(port, () => {
   console.log(`Express running on port ${port};\n` + `Press Ctrl-C to terminate the process.`);
