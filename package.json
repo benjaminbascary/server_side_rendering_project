@@ -10,7 +10,8 @@
     }
   },
   "scripts": {
-    "test": "jest",
+    "cypress": "cypress open",
+    "test": "jest --watch --coverage",
     "server": "nodemon app.js"
   },
   "author": "",
@@ -23,6 +24,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.18.2",
     "babel-jest": "^28.1.1",
+    "cypress": "^10.0.3",
     "jest": "^28.1.1"
   }
 }
