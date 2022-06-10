@@ -12,7 +12,8 @@
   "scripts": {
     "cypress": "cypress open",
     "test": "jest --watch --coverage",
-    "server": "nodemon app.js"
+    "server": "nodemon app.js",
+    "lint": "eslint app.js lib"
   },
   "author": "",
   "license": "ISC",
