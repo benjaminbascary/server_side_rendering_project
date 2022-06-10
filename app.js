@@ -1,13 +1,11 @@
 import { engine as expressHandlebars } from 'express-handlebars';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import fortunes from './data/fortuneCookies.js';
+import randomFortune from './lib/fortuneCookies.js';
 import express from 'express';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-const app = express()
-
+const app = express();
 const port = process.env.PORT || 3000;
 
 /**
@@ -15,8 +13,6 @@ const port = process.env.PORT || 3000;
  */
 
 app.use(express.static(__dirname + '/public'));
-
-
 
 /**
  * HandleBars handler
@@ -36,9 +32,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/about', (req, res) => {
-	const randomFortune = fortunes[Math.floor(Math.random()*fortunes.length)]
 	res.render('about', {fortune: randomFortune});
-
 })
 
 /**
@@ -53,10 +47,9 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
 	console.error(err);
 	res.status(500);
-	res.render('500')
+	res.render('500');
 })
 
 app.listen(port, () => {
   console.log(`Express running on port ${port};\n` + `Press Ctrl-C to terminate the process.`);
 })
-
