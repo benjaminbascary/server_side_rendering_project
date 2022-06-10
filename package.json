@@ -4,6 +4,11 @@
   "description": "",
   "main": "app.js",
   "type": "module",
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
   "scripts": {
     "test": "jest",
     "server": "nodemon app.js"
@@ -16,6 +21,8 @@
     "nodemon": "^2.0.16"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.18.2",
+    "babel-jest": "^28.1.1",
     "jest": "^28.1.1"
   }
 }
