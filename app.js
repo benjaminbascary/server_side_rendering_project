@@ -1,4 +1,4 @@
-import { homePage, aboutPage, serverError, notFound, toursRequest } from './lib/handlers.js';
+import { homePage, aboutPage, serverError, notFound, toursRequest, toursPage } from './lib/handlers.js';
 import { headerRequest } from './lib/headersRequest.js';
 import { engine as expressHandlebars } from 'express-handlebars';
 import { fileURLToPath } from 'url';
@@ -39,7 +39,9 @@ app.get('/about', aboutPage);
 
 app.get('/headers', headerRequest);
 
-app.get('/api/tours', toursRequest);
+app.get('/tours', toursPage);
+
+//app.get('/api/tours', toursRequest);
 
 /**
  * 404 and 500 custom pages.
